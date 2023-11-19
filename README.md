@@ -8,11 +8,19 @@ Displays telemetry data about your current train trip in a plasmoid, if you are 
 
 ## Installation
 
+Install build dependencies
+
+* Qt
+* NetworkManagerQt
+* extra-cmake-modules
+* c++utilities
+* qtutilities
+
 Configure cmake project
 
 ```
 mkdir build && cd build
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .. 
 ```
 
 Compile sources
