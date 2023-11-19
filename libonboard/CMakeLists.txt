@@ -10,7 +10,7 @@ set(META_PUBLIC_QT_MODULES Gui Widgets Network)
 
 # TODO: remove
 add_definitions(
-    -DUSE_LOCAL_SERVER
+#    -DUSE_LOCAL_SERVER
 )
 
 
