@@ -1,0 +1,21 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=@META_APP_NAME@
+Comment=@META_APP_DESCRIPTION@
+Icon=network-wireless
+Type=Service
+Keywords=onboard;train;ice;db;
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=@META_APP_AUTHOR@
+X-KDE-PluginInfo-Email=@META_APP_AUTHOR_MAIL@
+X-KDE-PluginInfo-License=@META_PROJECT_LICENSE@
+X-KDE-PluginInfo-Name=@META_ID@
+X-KDE-PluginInfo-Version=@META_VERSION_MAJOR@.@META_VERSION_MINOR@.@META_VERSION_PATCH@
+X-KDE-PluginInfo-Website=@META_APP_URL@
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-Library=@META_TARGET_NAME@

@@ -1,0 +1,27 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "@META_APP_AUTHOR_MAIL@",
+                "Name": "@META_APP_AUTHOR@"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "@META_APP_DESCRIPTION@",
+        "EnabledByDefault": true,
+        "Icon": "network-wireless",
+        "Id": "@META_ID@",
+        "License": "@META_PROJECT_LICENSE@",
+        "Name": "@META_APP_NAME@",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "@META_VERSION_MAJOR@.@META_VERSION_MINOR@.@META_VERSION_PATCH@",
+        "Website": "@META_APP_URL@"
+    },
+    "Keywords": "onboard;train;ice;db;bahn;",
+    "X-KDE-ParentApp": "",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-RemoteLocation": ""
+}
