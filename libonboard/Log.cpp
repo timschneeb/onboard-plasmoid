@@ -25,6 +25,10 @@ Log::Log() {
     QDir dir(TEMP_PATH);
     if (!dir.exists())
         dir.mkpath(".");
+
+    QFile file(TEMP_PATH"/application.log");
+    if(file.exists())
+        file.remove();
 }
 
 void Log::kernel(const QString &log)
