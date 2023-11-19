@@ -32,10 +32,11 @@ OnboardApplet::OnboardApplet(QObject *parent, const QVariantList &data)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     : Applet(parent, KPluginMetaData(), data)
 #else
-    : Applet(parent, data), _onboard(new Onboard(this))
+    : Applet(parent, data)
 #endif
     , _initialized(false)
     , _tooltipIcon(QIcon::fromTheme("clock"))
+    , _onboard(new Onboard(this))
 {
     connect(_onboard, &Onboard::hasDataChanged, this, &OnboardApplet::onHasDataStateChanged);
     connect(_onboard, &Onboard::statusChanged, this, &OnboardApplet::onTrainStatusUpdated);
