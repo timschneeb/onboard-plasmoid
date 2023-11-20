@@ -38,6 +38,7 @@ OnboardApplet::OnboardApplet(QObject *parent, const QVariantList &data)
     , _tooltipIcon(QIcon::fromTheme("clock"))
     , _onboard(new Onboard(this))
 {
+    onHasDataStateChanged(false);
     connect(_onboard, &Onboard::hasDataChanged, this, &OnboardApplet::onHasDataStateChanged);
     connect(_onboard, &Onboard::statusChanged, this, &OnboardApplet::onTrainStatusUpdated);
     connect(_onboard, &Onboard::currentTripChanged, this, &OnboardApplet::onTrainStatusUpdated);
@@ -100,6 +101,7 @@ void OnboardApplet::onTrainStatusUpdated()
     QString destination = "?";
     QString trainNumber = "?";
     QString delayInformation = "Derzeit pünktlich";
+    int distanceToPrevStation = 0;
 
     auto* currentTrip = _onboard->currentTrip();
     if(currentTrip->trip() != nullptr && currentTrip->trip()->stopInfo() != nullptr) {
@@ -114,13 +116,17 @@ void OnboardApplet::onTrainStatusUpdated()
             if(stop == nullptr || stop->station() == nullptr || stop->track() == nullptr ||
                 stop->timetable() == nullptr || stop->info() == nullptr)
                 continue;
+
+            if(stopInfo->actualLast() == stop->station()->evaNr())
+                distanceToPrevStation = stop->info()->distance();
+
             if(stopInfo->actualNext() != stop->station()->evaNr())
                 continue;
 
             StopTimetable* time = stop->timetable();
             QDateTime now = QDateTime::currentDateTime();
 
-            distanceToNext = QString::number(stop->info()->distance()/1000.0, 'f', 1);
+            distanceToNext = QString::number((stop->info()->distance() - trip->distanceFromLastStop())/1000.0, 'f', 1);
             hasArrived = stop->info()->positionStatus() == "arrived";
             nextStation = stop->station()->name();
             platform = stop->track()->actual();

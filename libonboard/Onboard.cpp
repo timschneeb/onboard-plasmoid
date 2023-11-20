@@ -10,7 +10,7 @@
 
 bool Onboard::_ready = false;
 
-QStringList Onboard::_ssids = QStringList(std::initializer_list<QString>({"WIFIonICE", "WIFI@DB", "GS"}));
+QStringList Onboard::_ssids = QStringList(std::initializer_list<QString>({"WIFIonICE", "WIFI@DB"}));
 
 Onboard::Onboard(QObject *parent) : _apiClient(new OnboardApiClient(this)), QObject{parent}
 {
@@ -93,7 +93,7 @@ void Onboard::toggleBackgroundService(bool enable)
 
     if(enable) {
         _pollTimer.setSingleShot(false);
-        _pollTimer.setInterval(2000);
+        _pollTimer.setInterval(4000);
         _pollTimer.start();
         pollData();
     }
