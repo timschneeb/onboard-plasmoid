@@ -8,7 +8,14 @@ Displays telemetry data about your current train trip in a plasmoid, if you are 
 
 ## Installation
 
-Install build dependencies
+### Arch Linux
+Install [onboard-plasmoid-git](https://aur.archlinux.org/packages/onboard-plasmoid-git) from the AUR:
+```
+yay -S onboard-plasmoid-git
+```
+
+### Compile from sources
+Install dependencies
 
 * Qt
 * NetworkManagerQt
