@@ -2,6 +2,15 @@
 
 Displays telemetry data about your current train trip in a plasmoid, if you are connected to a supported WIFI hotspot on the train.
 
+
+In the panel:
+
+![screenshot-panel](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_Panel2.png)
+
+On the desktop:
+
+![screenshot-desktop](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_DesktopHover1.png)
+
 ## Supported providers
 
 * WIFIonICE: IC/EC/ICE trains (Germany)
