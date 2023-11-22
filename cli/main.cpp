@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
                         else
                             output += pad("Next station", "%1 (%2)").arg(stop->station()->name()).arg(stop->station()->evaNr());
 
-                        output += pad("Remaining distance", "%1km").arg(stop->info()->distance()/1000.0, 0, 'f', 1);
+                        output += pad("Remaining distance", "%1km").arg(stop->info()->distance() - trip->distanceFromLastStop()/1000.0, 0, 'f', 1);
                         output += pad("Arriving on platform", "%1").arg(stop->track()->actual());
                         output += pad("Scheduled arrival time", "%1").arg(QDateTime::fromMSecsSinceEpoch(stop->timetable()->scheduledArrivalTime()).toString(Qt::RFC2822Date));
                         output += pad("Actual arrival time", "%1").arg(QDateTime::fromMSecsSinceEpoch(stop->timetable()->actualArrivalTime()).toString(Qt::RFC2822Date));
