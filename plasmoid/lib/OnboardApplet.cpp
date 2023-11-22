@@ -84,8 +84,8 @@ void OnboardApplet::onHasDataStateChanged(bool state)
         setStatusIcon(QIcon());
         setStatusText("");
         setSecondaryStatusText("");
-        setTooltipText("Onboard tracking");
-        setSecondaryTooltipText("No supported WIFI connection");
+        setTooltipText(tr("Onboard tracking"));
+        setSecondaryTooltipText(tr("No supported WIFI connection"));
     }
 }
 
@@ -94,13 +94,13 @@ void OnboardApplet::onTrainStatusUpdated()
     QString distanceToNext = "?";
     QString platform = "?";
     QString nextStation = "?";
-    QString arrivingInMin = "?";
-    QString departingInMin = "?";
+    int arrivingInMin = 0;
+    int departingInMin = 0;
     bool hasArrived = false;
 
     QString destination = "?";
     QString trainNumber = "?";
-    QString delayInformation = "Derzeit pünktlich";
+    QString delayInformation = tr("Currently on time");
     int distanceToPrevStation = 0;
 
     auto* currentTrip = _onboard->currentTrip();
@@ -131,17 +131,17 @@ void OnboardApplet::onTrainStatusUpdated()
             nextStation = stop->station()->name();
             platform = stop->track()->actual();
 
-            arrivingInMin = QString::number(now.secsTo(QDateTime::fromMSecsSinceEpoch(time->actualArrivalTime())) / 60);
-            departingInMin = QString::number(now.secsTo(QDateTime::fromMSecsSinceEpoch(time->actualDepartureTime())) / 60);
+            arrivingInMin = now.secsTo(QDateTime::fromMSecsSinceEpoch(time->actualArrivalTime())) / 60;
+            departingInMin = now.secsTo(QDateTime::fromMSecsSinceEpoch(time->actualDepartureTime())) / 60;
 
             int delay = utils::parseDelayTime(hasArrived ? time->departureDelay() : time->arrivalDelay());
             if(delay > 1) {
-                QString format = hasArrived ? "Abfahrt in %1 um %2 Minuten verzögert." : "Ankunft in %1 um %2 Minuten verzögert.";
-                delayInformation = QString(format).arg(nextStation).arg(delay);
+                QString format = hasArrived ? tr("Departure in %1 delayed by %n minutes.", "0", delay) : tr("Arrival in %1 delayed by %n minutes.", "0", delay);
+                delayInformation = QString(format).arg(nextStation);
             }
 
             for(int j = 0; j < stop->delayReasonsCount(); j++) {
-                delayInformation += "\nHinweis: " + stop->delayReasonsAt(j)->text();
+                delayInformation += tr("\nNotice: ") + stop->delayReasonsAt(j)->text();
             }
             break;
         }
@@ -150,16 +150,16 @@ void OnboardApplet::onTrainStatusUpdated()
     auto* status = _onboard->status();
     if(hasArrived) {
         setStatusIcon(QIcon::fromTheme("go-right"));
-        setStatusText(QString("Auf Gleis %2 in %1").arg(nextStation).arg(platform));
-        setSecondaryStatusText(QString("%1 km/h | Abfahrt in %2 Minuten").arg(status->speed()).arg(departingInMin));
+        setStatusText(QString(tr("At platform %2 in %1")).arg(nextStation).arg(platform));
+        setSecondaryStatusText(tr("%1 km/h | Departure in %n minutes", "0", departingInMin).arg(status->speed()));
     }
     else {
         setStatusIcon(QIcon::fromTheme("up"));
-        setStatusText(QString("%1 in %2 Minuten").arg(nextStation).arg(arrivingInMin));
-        setSecondaryStatusText(QString("%1 km/h | noch %2 km | Gleis %3").arg(status->speed()).arg(distanceToNext).arg(platform));
+        setStatusText(QString(tr("%1 in %n minutes", "0", arrivingInMin)).arg(nextStation));
+        setSecondaryStatusText(tr("%1 km/h | %2 km remaining | Platform %3").arg(status->speed()).arg(distanceToNext).arg(platform));
     }
 
-    setTooltipText(QString("%1 nach %2").arg(trainNumber).arg(destination));
+    setTooltipText(tr("%1 to %2").arg(trainNumber).arg(destination));
     setSecondaryTooltipText(delayInformation);
 }
 
