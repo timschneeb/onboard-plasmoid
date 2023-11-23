@@ -17,7 +17,7 @@ ColumnLayout {
         Button {
             id: iconButton
 
-            Kirigami.FormData.label: i18n("Disconnection icon:")
+            Kirigami.FormData.label: qsTr("Disconnection icon:")
 
             implicitWidth: previewFrame.width + PlasmaCore.Units.smallSpacing * 2
             implicitHeight: previewFrame.height + PlasmaCore.Units.smallSpacing * 2

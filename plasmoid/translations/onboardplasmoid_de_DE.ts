@@ -32,6 +32,10 @@
         <source>Choose…</source>
         <translation>Auswählen…</translation>
     </message>
+    <message>
+        <source>Disconnection icon:</source>
+        <translation>Trennungssymbol:</translation>
+    </message>
 </context>
 <context>
     <name>ConfigTestMode</name>

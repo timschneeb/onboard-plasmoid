@@ -27,6 +27,10 @@
         <source>Choose…</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Disconnection icon:</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>ConfigTestMode</name>
