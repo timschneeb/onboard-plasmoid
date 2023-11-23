@@ -12,11 +12,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>Open icon chooser dialog</source>
-        <comment>Choose…</comment>
-        <translation></translation>
-    </message>
-    <message>
         <source>Reset icon to default</source>
         <translation></translation>
     </message>
@@ -26,6 +21,10 @@
     </message>
     <message>
         <source>Show error label when not connected to any trains</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Choose…</source>
         <translation></translation>
     </message>
 </context>

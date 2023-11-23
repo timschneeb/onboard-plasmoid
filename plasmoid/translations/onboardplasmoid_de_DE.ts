@@ -14,7 +14,7 @@
     <message>
         <source>Open icon chooser dialog</source>
         <comment>Choose…</comment>
-        <translation>Öffne Symbolauswahldialog</translation>
+        <translation type="vanished">Öffne Symbolauswahldialog</translation>
     </message>
     <message>
         <source>Reset icon to default</source>
@@ -27,6 +27,10 @@
     <message>
         <source>Show error label when not connected to any trains</source>
         <translation>Zeige eine Fehlermeldung an, wenn keine Verbindung zu einem Zug besteht</translation>
+    </message>
+    <message>
+        <source>Choose…</source>
+        <translation>Auswählen…</translation>
     </message>
 </context>
 <context>

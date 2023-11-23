@@ -46,7 +46,7 @@ ColumnLayout {
                     anchors.centerIn: parent
                     width: PlasmaCore.Units.iconSizes.large
                     height: width
-                    source: (plasmoid.formFactor === PlasmaCore.Types.Vertical && cfg_iconDisconnect === "")
+                    source: (cfg_iconDisconnect === "")
                             ? "network-offline-symbolic" : cfg_iconDisconnect;
                 }
             }
@@ -58,7 +58,7 @@ ColumnLayout {
                 y: +parent.height
 
                 MenuItem {
-                    text: qsTr("Open icon chooser dialog", "Choose…")
+                    text: qsTr("Choose…")
                     icon.name: "document-open-folder"
                     onClicked: iconDialog.open()
                 }
@@ -71,7 +71,7 @@ ColumnLayout {
                 MenuItem {
                     text: qsTr("Remove icon")
                     icon.name: "delete"
-                    enabled: cfg_iconDisconnect !== "" && plasmoid.formFactor !== PlasmaCore.Types.Vertical
+                    enabled: cfg_iconDisconnect !== ""
                     onClicked: cfg_iconDisconnect = ""
                 }
             }
