@@ -9,33 +9,64 @@ on:
 
 jobs:
   build-amd64:
-    runs-on: ubuntu-20.04
-    container: ubuntu:23.10
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Setup APT
-      run:  echo 'APT::Acquire::Retries "4";' > /etc/apt/apt.conf.d/80-retries
-
-    - name: Run APT updates
       run: |
-        apt update
-        apt upgrade -y git
+        echo 'APT::Acquire::Retries "4";' | sudo tee /etc/apt/apt.conf.d/80-retries
+        export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PATH"
+        export DEBIAN_FRONTEND="noninteractive"
+        sudo apt update -y
+        sudo apt install -y git make cmake ninja-build gcc g++ appstream pkg-config plasma-workspace-dev qttools5-dev libqt5svg5-dev libkf5networkmanagerqt-dev extra-cmake-modules
 
     - uses: actions/checkout@v2
       with:
         ref: 'master'
         submodules: 'recursive'
 
-    - name: Install dependencies
+    - uses: actions/checkout@v2
+      with:
+        repository: Martchus/cpp-utilities
+        ref: 'master'
+        submodules: 'recursive'
+        path: './cpp-utilities'
+
+    - name: Compile cpp-utilities
       run: |
-        export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PATH"
-        echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
-        echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
-        DEBIAN_FRONTEND="noninteractive"
-        apt install -y tree make cmake gcc g++ pkg-config plasma-framework-dev qtbase5-dev libqt5svg5-dev libmartchus-qtutilities-dev libmartchus-c++utilities-dev libkf5networkmanagerqt-dev extra-cmake-modules
+        cd cpp-utilities
+        cmake \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE:STRING='Release' \
+          -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+          -DBUILD_SHARED_LIBS:BOOL=OFF \
+          .
+        ninja
+        sudo ninja install
+        
+    - uses: actions/checkout@v2
+      with:
+        repository: Martchus/qtutilities
+        ref: 'master'
+        submodules: 'recursive'
+        path: './qtutilities'
+        
+    - name: Compile qtutilities
+      run: |
+        cd qtutilities
+        cmake \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE:STRING='Release' \
+          -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+          -DBUILD_SHARED_LIBS:BOOL=OFF \
+          -DBUILTIN_TRANSLATIONS:BOOL=ON \
+          .
+        ninja
+        sudo ninja install
 
     - name: Initialize project
       run: |
+        git config --global --add safe.directory '*'
         mkdir build && cd build
         mkdir deploy
         cmake .. -DCMAKE_INSTALL_PREFIX:PATH=`pwd`/deploy

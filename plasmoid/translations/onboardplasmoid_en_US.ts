@@ -25,11 +25,11 @@
     </message>
     <message>
         <source>Override locale:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Example: de_DE or en_US; leave empty to use default locale</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

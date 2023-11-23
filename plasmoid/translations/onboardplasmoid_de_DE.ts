@@ -50,11 +50,11 @@
     </message>
     <message>
         <source>Override locale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebietsschema überschreiben:</translation>
     </message>
     <message>
         <source>Example: de_DE or en_US; leave empty to use default locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Beispiel: de_DE oder en_US; leer lassen, um das standardmäßige Schema zu verwenden</translation>
     </message>
 </context>
 <context>

@@ -11,7 +11,7 @@ set(HEADER_FILES )
 set(SRC_FILES main.cpp)
 
 # find c++utilities
-find_package(${PACKAGE_NAMESPACE_PREFIX}c++utilities${CONFIGURATION_PACKAGE_SUFFIX} 5.21.0 REQUIRED)
+find_package(${PACKAGE_NAMESPACE_PREFIX}c++utilities${CONFIGURATION_PACKAGE_SUFFIX} 5.20.0 REQUIRED)
 use_cpp_utilities()
 
 # find qtutilities
