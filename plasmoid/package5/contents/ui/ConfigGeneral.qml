@@ -36,7 +36,7 @@ ColumnLayout {
             id: iconDisconnect
             label: qsTr("Disconnect icon")
             value: cfg_iconDisconnect
-            defaultValue: "network-offline-symbolic"
+            defaultValue: "network-wireless-disconnected"
             onValueChanged: cfg_iconDisconnect = value
         }
 

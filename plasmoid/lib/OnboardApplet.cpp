@@ -117,7 +117,7 @@ void OnboardApplet::onHasDataStateChanged(bool state)
         QString dcTitle = tr("Onboard tracking");
         QString dcMessage = tr("No supported WIFI connection");
         setStatusIconVisible(showDcIcon);
-        setStatusIcon(showDcIcon ? QIcon::fromTheme(group.readEntry("iconDisconnect", "network-offline-symbolic")) : QIcon());
+        setStatusIcon(showDcIcon ? QIcon::fromTheme(group.readEntry("iconDisconnect", "network-wireless-disconnected")) : QIcon());
         setStatusText(showDcLabel ? dcTitle : "");
         setSecondaryStatusText(showDcLabel ? dcMessage : "");
         setTooltipText(dcTitle);

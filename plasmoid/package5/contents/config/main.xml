@@ -15,7 +15,7 @@
         </entry>
         <entry name="iconDisconnect" type="String">
             <label>The name of the icon used when no connection is available</label>
-            <default>network-offline-symbolic</default>
+            <default>network-wireless-disconnected</default>
         </entry>
         <entry name="iconDisconnectShown" type="Bool">
             <label>Is the disconnect icon shown when no connection is available</label>
