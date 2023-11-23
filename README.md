@@ -69,6 +69,8 @@ Please check this screenshot for a recommended layout choice:
 [![screenshot-full](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_Full1.png)](https://raw.githubusercontent.com/ThePBone/onboard-plasmoid/master/screenshot/Screenshot_Full1.png)
 My panel uses the following widgets: `Application Launcher | Virtual desktop pager | Onboard plasmoid | SPACER | Task manager | SPACER | System tray | Clock`
 
+I'm using the [Papirus icon theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) which has better looking arrows than the default one.
+
 ### CLI
 
 The plasmoid is bundled with a simple CLI application that can be used to monitor the train status within the terminal.
