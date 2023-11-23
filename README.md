@@ -66,7 +66,7 @@ Right-click your panel or desktop, select 'Add widgets' and choose the plasmoid 
 This plasmoid has a dynamic width and **should be placed in front of a spacer** if used in the panel. It will turn invisible and shrink in size a bit if you are not connected to a supported WIFI hotspot.  
 
 Please check this screenshot for a recommended layout choice:
-![screenshot-full](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_Full1.png)
+[![screenshot-full](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_Full1.png)](https://raw.githubusercontent.com/ThePBone/onboard-plasmoid/master/screenshot/Screenshot_Full1.png)
 
 ### CLI
 
