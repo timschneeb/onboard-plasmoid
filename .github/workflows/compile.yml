@@ -1,0 +1,52 @@
+name: Compile all binaries
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-amd64:
+    runs-on: ubuntu-20.04
+    container: ubuntu:23.10
+
+    steps:
+    - name: Setup APT
+      run:  echo 'APT::Acquire::Retries "4";' > /etc/apt/apt.conf.d/80-retries
+
+    - name: Run APT updates
+      run: |
+        apt update
+        apt upgrade -y git
+
+    - uses: actions/checkout@v2
+      with:
+        ref: 'master'
+        submodules: 'recursive'
+
+    - name: Install dependencies
+      run: |
+        export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PATH"
+        echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
+        echo 'tzdata tzdata/Zones/Europe select Paris' | debconf-set-selections
+        DEBIAN_FRONTEND="noninteractive"
+        apt install -y tree make cmake gcc g++ pkg-config plasma-framework-dev qtbase5-dev libqt5svg5-dev libmartchus-qtutilities-dev libmartchus-c++utilities-dev libkf5networkmanagerqt-dev extra-cmake-modules
+
+    - name: Initialize project
+      run: |
+        mkdir build && cd build
+        mkdir deploy
+        cmake .. -DCMAKE_INSTALL_PREFIX:PATH=`pwd`/deploy
+
+    - name: Build
+      run: |
+        cd build
+        make install
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact-amd64
+        path: build/deploy/
