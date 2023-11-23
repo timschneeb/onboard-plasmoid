@@ -38,15 +38,15 @@
     </message>
     <message>
         <source>Current stop icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol für den derzeitigen Halt</translation>
     </message>
     <message>
         <source>Next stop icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol für den nächsten Halt</translation>
     </message>
     <message>
         <source>Disconnect icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennungssymbol</translation>
     </message>
 </context>
 <context>
@@ -76,15 +76,15 @@
     <name>IconChooser</name>
     <message>
         <source>Icon name is &quot;%1&quot;</source>
-        <translation type="unfinished">Symbolname ist &quot;%1&quot;</translation>
+        <translation>Symbolname ist &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Choose…</source>
-        <translation type="unfinished">Auswählen…</translation>
+        <translation>Auswählen…</translation>
     </message>
     <message>
         <source>Reset icon to default</source>
-        <translation type="unfinished">Setze das Symbol zurück</translation>
+        <translation>Setze das Symbol zurück</translation>
     </message>
     <message>
         <source>Remove icon</source>
