@@ -14,6 +14,7 @@ ColumnLayout {
     property string cfg_iconDisconnect: plasmoid.configuration.iconDisconnect
     property alias cfg_iconDisconnectShown : iconDisconnectShownCheckbox.checked
     property alias cfg_labelDisconnectShown: labelDisconnectShownCheckbox.checked
+    property alias cfg_localeOverride: customLocaleTextField.text
 
     Kirigami.FormLayout {
         IconChooser {
@@ -48,6 +49,12 @@ ColumnLayout {
         CheckBox {
             id: labelDisconnectShownCheckbox
             text: qsTr("Show error label when not connected to any trains")
+        }
+
+        Kirigami.ActionTextField {
+            id: customLocaleTextField
+            Kirigami.FormData.label: qsTr("Override locale:")
+            placeholderText: qsTr("Example: de_DE or en_US; leave empty to use default locale")
         }
     }
 

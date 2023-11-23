@@ -25,6 +25,10 @@
             <label>Is the disconnect label shown when no connection is available</label>
             <default>false</default>
         </entry>
+        <entry name="localeOverride" type="String">
+            <label>Override locale</label>
+            <default></default>
+        </entry>
     </group>
     <group name="Test mode">
         <entry name="testModeEnabled" type="Bool">

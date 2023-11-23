@@ -48,7 +48,7 @@ OnboardApplet::OnboardApplet(QObject *parent, const QVariantList &data)
 
 void OnboardApplet::init()
 {
-    LOAD_QT_TRANSLATIONS;
+    updateTranslator();
 
 // ensure FONTCONFIG_PATH is set (mainly required for static GNU/Linux builds)
 #ifdef QT_FEATURE_fontdialog
@@ -86,6 +86,9 @@ QString OnboardApplet::resolveFallbackIcon(const QString &primary, const QString
 
 void OnboardApplet::configChanged()
 {
+    // Retranslate
+    updateTranslator();
+
     // Update disconnection icon/label
     onHasDataStateChanged(_onboard->hasData());
 
@@ -104,6 +107,24 @@ void OnboardApplet::updateTestModeState()
     KConfigGroup group = config().group("Test mode");
     QString url = group.readEntry("testModeApiUrl", "http://localhost:9000/api1/rs");
     _onboard->setTestMode(group.readEntry("testModeEnabled", false), url);
+}
+
+void OnboardApplet::updateTranslator()
+{
+    KConfigGroup group = config().group("General");
+    QString localeOverride = group.readEntry("localeOverride", "");
+    QString locale = localeOverride.length() < 1 ? QLocale().name() : localeOverride;
+
+    QtUtilities::TranslationFiles::clearTranslationFiles();
+    QtUtilities::TranslationFiles::loadQtTranslationFile(QT_TRANSLATION_FILES, locale);
+
+    // load fallback translation files
+    QtUtilities::TranslationFiles::loadApplicationTranslationFile(QStringLiteral(PROJECT_CONFIG_NAME), APP_SPECIFIC_QT_TRANSLATION_FILES, QStringLiteral("en_US"));
+
+    // load translation files for current (or overwritten) locale
+    if (locale != QLatin1String("en_US")) {
+        QtUtilities::TranslationFiles::loadApplicationTranslationFile(QStringLiteral(PROJECT_CONFIG_NAME), APP_SPECIFIC_QT_TRANSLATION_FILES, locale);
+    }
 }
 
 

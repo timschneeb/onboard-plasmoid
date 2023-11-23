@@ -48,6 +48,14 @@
         <source>Disconnect icon</source>
         <translation>Trennungssymbol</translation>
     </message>
+    <message>
+        <source>Override locale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example: de_DE or en_US; leave empty to use default locale</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigTestMode</name>

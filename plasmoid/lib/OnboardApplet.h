@@ -57,7 +57,9 @@ protected slots:
 private slots:
     void onHasDataStateChanged(bool state);
     void onTrainStatusUpdated();
+
     void updateTestModeState();
+    void updateTranslator();
 
 signals:
     void statusTextChanged();
