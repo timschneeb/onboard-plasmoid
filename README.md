@@ -29,8 +29,8 @@ Install dependencies
 * Qt
 * NetworkManagerQt
 * extra-cmake-modules
-* c++utilities
-* qtutilities
+* [c++utilities](https://github.com/Martchus/cpp-utilities)
+* [qtutilities](https://github.com/Martchus/qtutilities)
 
 Configure cmake project
 
