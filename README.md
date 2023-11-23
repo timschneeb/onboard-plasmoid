@@ -71,6 +71,9 @@ My panel uses the following widgets: `Application Launcher | Virtual desktop pag
 
 I'm using the [Papirus icon theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) which has better looking arrows than the default one.
 
+The plasmoid is configurable and also supports a test mode for local testing with saved API responses:
+![screenshot-config](https://github.com/ThePBone/onboard-plasmoid/blob/master/screenshot/Screenshot_Config1.png)
+
 ### CLI
 
 The plasmoid is bundled with a simple CLI application that can be used to monitor the train status within the terminal.
