@@ -29,6 +29,7 @@ Install dependencies
 * Qt
 * NetworkManagerQt
 * extra-cmake-modules
+* plasma-workspace
 * [c++utilities](https://github.com/Martchus/cpp-utilities)
 * [qtutilities](https://github.com/Martchus/qtutilities)
 
