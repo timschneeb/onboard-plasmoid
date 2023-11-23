@@ -9,72 +9,35 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 ColumnLayout {
+    property string cfg_iconCurrentStop: plasmoid.configuration.iconCurrentStop
+    property string cfg_iconNextStop: plasmoid.configuration.iconNextStop
     property string cfg_iconDisconnect: plasmoid.configuration.iconDisconnect
     property alias cfg_iconDisconnectShown : iconDisconnectShownCheckbox.checked
     property alias cfg_labelDisconnectShown: labelDisconnectShownCheckbox.checked
 
     Kirigami.FormLayout {
-        Button {
-            id: iconButton
+        IconChooser {
+            id: iconCurrentStop
+            label: qsTr("Current stop icon")
+            value: cfg_iconCurrentStop
+            defaultValue: plasmoid.nativeInterface.resolveFallbackIcon("go-right", "arrow-right")
+            onValueChanged: cfg_iconCurrentStop = value
+        }
 
-            Kirigami.FormData.label: qsTr("Disconnection icon:")
+        IconChooser {
+            id: iconNextStop
+            label: qsTr("Next stop icon")
+            value: cfg_iconNextStop
+            defaultValue: plasmoid.nativeInterface.resolveFallbackIcon("up", "arrow-up")
+            onValueChanged: cfg_iconNextStop = value
+        }
 
-            implicitWidth: previewFrame.width + PlasmaCore.Units.smallSpacing * 2
-            implicitHeight: previewFrame.height + PlasmaCore.Units.smallSpacing * 2
-            hoverEnabled: true
-
-            Accessible.role: Accessible.ButtonMenu
-
-            ToolTip.delay: Kirigami.Units.toolTipDelay
-            ToolTip.text: qsTr("Icon name is \"%1\"", cfg_iconDisconnect)
-            ToolTip.visible: iconButton.hovered && cfg_iconDisconnect.length > 0
-
-            KQuickAddons.IconDialog {
-                id: iconDialog
-                onIconNameChanged: cfg_iconDisconnect = iconName || "network-offline-symbolic"
-            }
-
-            onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
-
-            PlasmaCore.FrameSvgItem {
-                id: previewFrame
-                anchors.centerIn: parent
-                width: PlasmaCore.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
-                height: PlasmaCore.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
-
-                PlasmaCore.IconItem {
-                    anchors.centerIn: parent
-                    width: PlasmaCore.Units.iconSizes.large
-                    height: width
-                    source: (cfg_iconDisconnect === "")
-                            ? "network-offline-symbolic" : cfg_iconDisconnect;
-                }
-            }
-
-            Menu {
-                id: iconMenu
-
-                // Appear below the button
-                y: +parent.height
-
-                MenuItem {
-                    text: qsTr("Choose…")
-                    icon.name: "document-open-folder"
-                    onClicked: iconDialog.open()
-                }
-                MenuItem {
-                    text: qsTr("Reset icon to default")
-                    icon.name: "edit-clear"
-                    enabled: cfg_iconDisconnect !== "network-offline-symbolic"
-                    onClicked: cfg_iconDisconnect = "network-offline-symbolic"
-                }
-                MenuItem {
-                    text: qsTr("Remove icon")
-                    icon.name: "delete"
-                    enabled: cfg_iconDisconnect !== ""
-                    onClicked: cfg_iconDisconnect = ""
-                }
-            }
+        IconChooser {
+            id: iconDisconnect
+            label: qsTr("Disconnect icon")
+            value: cfg_iconDisconnect
+            defaultValue: "network-offline-symbolic"
+            onValueChanged: cfg_iconDisconnect = value
         }
 
         CheckBox {

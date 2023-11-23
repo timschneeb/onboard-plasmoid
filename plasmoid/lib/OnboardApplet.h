@@ -49,6 +49,7 @@ public:
 public slots:
     void init() override;
     void initEngine(QObject *object);
+    QString resolveFallbackIcon(const QString& primary, const QString& fallback);
 
 protected slots:
     void configChanged() override;

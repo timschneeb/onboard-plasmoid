@@ -79,10 +79,19 @@ void OnboardApplet::initEngine(QObject *object)
     Log::debug("QML engine initialized");
 }
 
+QString OnboardApplet::resolveFallbackIcon(const QString &primary, const QString &fallback)
+{
+    return QIcon::hasThemeIcon(primary) ? primary : fallback;
+}
+
 void OnboardApplet::configChanged()
 {
     // Update disconnection icon/label
     onHasDataStateChanged(_onboard->hasData());
+
+    // Update station icons
+    if(_onboard->hasData())
+        onTrainStatusUpdated();
 
     // Update test mode
     updateTestModeState();
@@ -118,6 +127,17 @@ void OnboardApplet::onHasDataStateChanged(bool state)
 
 void OnboardApplet::onTrainStatusUpdated()
 {
+    KConfigGroup group = config().group("General");
+
+    QString currentStationIconName = group.readEntry("iconCurrentStop", "go-right");
+    QString nextStationIconName = group.readEntry("iconNextStop", "up");
+
+    // Workaround for possibly missing icon
+    if(!QIcon::hasThemeIcon(nextStationIconName))
+        nextStationIconName = "arrow-up";
+    if(!QIcon::hasThemeIcon(currentStationIconName))
+        currentStationIconName = "arrow-right";
+
     QString distanceToNext = "?";
     QString platform = "?";
     QString nextStation = "?";
@@ -176,13 +196,12 @@ void OnboardApplet::onTrainStatusUpdated()
 
     auto* status = _onboard->status();
     if(hasArrived) {
-        setStatusIcon(QIcon::fromTheme("go-right"));
+        setStatusIcon(QIcon::fromTheme(currentStationIconName));
         setStatusText(tr("At platform %2 in %1").arg(nextStation).arg(platform));
         setSecondaryStatusText(tr("%1 km/h | Departure in %2%n minute(s)", "", std::abs(departingInMin)).arg(status->speed()).arg(departingInMin < 0 ? "-" : ""));
     }
     else {
-
-        setStatusIcon(QIcon::fromTheme(QIcon::hasThemeIcon("up") ? "up" : "go-up"));
+        setStatusIcon(QIcon::fromTheme(nextStationIconName));
         setStatusText(tr("%1 in %2%n minute(s)", "", std::abs(arrivingInMin)).arg(nextStation).arg(arrivingInMin < 0 ? "-" : ""));
         setSecondaryStatusText(tr("%1 km/h | %2 km remaining | Platform %3").arg(status->speed()).arg(distanceToNext).arg(platform));
     }
@@ -213,6 +232,7 @@ QIcon OnboardApplet::statusIcon() const
 
 void OnboardApplet::setStatusIcon(const QIcon &newStatusIcon)
 {
+
     _statusIcon = newStatusIcon;
     emit statusIconChanged();
 }

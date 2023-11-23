@@ -5,8 +5,16 @@
     http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
     <kcfgfile name=""/>
     <group name="General">
+        <entry name="iconCurrentStop" type="String">
+            <label>The name of the icon used when you are currently waiting at a station</label>
+            <default>go-right</default>
+        </entry>
+        <entry name="iconNextStop" type="String">
+            <label>The name of the icon used when you are on the way to the next stop</label>
+            <default>up</default>
+        </entry>
         <entry name="iconDisconnect" type="String">
-            <label>The name of the icon used when no connection is available.</label>
+            <label>The name of the icon used when no connection is available</label>
             <default>network-offline-symbolic</default>
         </entry>
         <entry name="iconDisconnectShown" type="Bool">

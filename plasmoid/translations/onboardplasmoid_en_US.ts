@@ -8,28 +8,20 @@
         <translation></translation>
     </message>
     <message>
-        <source>Icon name is &quot;%1&quot;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Reset icon to default</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Remove icon</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Show error label when not connected to any trains</source>
         <translation></translation>
     </message>
     <message>
-        <source>Choose…</source>
-        <translation></translation>
+        <source>Current stop icon</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnection icon:</source>
-        <translation></translation>
+        <source>Next stop icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -49,6 +41,21 @@
     <message>
         <source>You can &lt;a href=&quot;https://raw.githubusercontent.com/ThePBone/onboard-plasmoid/master/misc/iceportal_api_snapshot.zip&quot;&gt;download an old ICE Portal API dump&lt;/a&gt; and use the provided &apos;run_server.sh&apos; script to setup a simple fake API for testing.</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>IconChooser</name>
+    <message>
+        <source>Icon name is &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset icon to default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

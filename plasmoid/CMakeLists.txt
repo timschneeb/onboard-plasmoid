@@ -22,6 +22,7 @@ set(PLASMOID_FILE_NAMES
     CompactRepresentation.qml
     ConfigGeneral.qml
     ConfigTestMode.qml
+    IconChooser.qml
     ToolTipView.qml
     main.qml)
 

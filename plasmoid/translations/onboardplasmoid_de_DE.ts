@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Icon name is &quot;%1&quot;</source>
-        <translation>Symbolname ist &quot;%1&quot;</translation>
+        <translation type="vanished">Symbolname ist &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Open icon chooser dialog</source>
@@ -18,11 +18,11 @@
     </message>
     <message>
         <source>Reset icon to default</source>
-        <translation>Setze das Symbol zurück</translation>
+        <translation type="vanished">Setze das Symbol zurück</translation>
     </message>
     <message>
         <source>Remove icon</source>
-        <translation>Symbol entfernen</translation>
+        <translation type="vanished">Symbol entfernen</translation>
     </message>
     <message>
         <source>Show error label when not connected to any trains</source>
@@ -30,11 +30,23 @@
     </message>
     <message>
         <source>Choose…</source>
-        <translation>Auswählen…</translation>
+        <translation type="vanished">Auswählen…</translation>
     </message>
     <message>
         <source>Disconnection icon:</source>
-        <translation>Trennungssymbol:</translation>
+        <translation type="vanished">Trennungssymbol:</translation>
+    </message>
+    <message>
+        <source>Current stop icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next stop icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect icon</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58,6 +70,25 @@
     <message>
         <source>You can &lt;a href=&quot;https://raw.githubusercontent.com/ThePBone/onboard-plasmoid/master/misc/iceportal_api_snapshot.zip&quot;&gt;download an old ICE Portal API dump&lt;/a&gt; and use the provided &apos;run_server.sh&apos; script to setup a simple fake API for testing.</source>
         <translation>Sie können &lt;a href=&quot;https://raw.githubusercontent.com/ThePBone/onboard-plasmoid/master/misc/iceportal_api_snapshot.zip&quot;&gt;einen alten ICE Portal API-Dump&lt;/a&gt; herunterladen und das mitgelieferte &apos;run_server.sh&apos; Skript verwenden, um eine gefälschte Test-API einzurichten.</translation>
+    </message>
+</context>
+<context>
+    <name>IconChooser</name>
+    <message>
+        <source>Icon name is &quot;%1&quot;</source>
+        <translation type="unfinished">Symbolname ist &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <source>Choose…</source>
+        <translation type="unfinished">Auswählen…</translation>
+    </message>
+    <message>
+        <source>Reset icon to default</source>
+        <translation type="unfinished">Setze das Symbol zurück</translation>
+    </message>
+    <message>
+        <source>Remove icon</source>
+        <translation type="obsolete">Symbol entfernen</translation>
     </message>
 </context>
 <context>
