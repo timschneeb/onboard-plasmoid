@@ -20,14 +20,25 @@ endif ()
 # define list of QML files; there is a distinct directory for each major Plasma version
 set(PLASMOID_FILE_NAMES
     CompactRepresentation.qml
+    ConfigGeneral.qml
+    ConfigTestMode.qml
     ToolTipView.qml
     main.qml)
 
+set(PLASMOID_CONFIG_FILE_NAMES
+    config.qml
+    main.xml)
+
 set(PLASMOID_FILES_BASE "package${KF_MAJOR_VERSION}")
 set(PLASMOID_FILES_UI "${PLASMOID_FILES_BASE}/contents/ui")
+set(PLASMOID_FILES_CONFIG "${PLASMOID_FILES_BASE}/contents/config")
 foreach (PLASMOID_FILE_NAME ${PLASMOID_FILE_NAMES})
     list(APPEND PLASMOID_FILES "${PLASMOID_FILES_UI}/${PLASMOID_FILE_NAME}")
 endforeach ()
+foreach (PLASMOID_FILE_NAME ${PLASMOID_CONFIG_FILE_NAMES})
+    list(APPEND PLASMOID_FILES "${PLASMOID_FILES_CONFIG}/${PLASMOID_FILE_NAME}")
+endforeach ()
+
 file(GLOB_RECURSE PLASMOID_EXCLUDED_FILES LIST_DIRECTORIES false RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "package*/*.qml")
 list(REMOVE_ITEM PLASMOID_EXCLUDED_FILES ${PLASMOID_FILES})
 

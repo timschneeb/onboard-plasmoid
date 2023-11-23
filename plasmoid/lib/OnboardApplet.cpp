@@ -38,6 +38,8 @@ OnboardApplet::OnboardApplet(QObject *parent, const QVariantList &data)
     , _tooltipIcon(QIcon::fromTheme("clock"))
     , _onboard(new Onboard(this))
 {
+    updateTestModeState();
+
     onHasDataStateChanged(false);
     connect(_onboard, &Onboard::hasDataChanged, this, &OnboardApplet::onHasDataStateChanged);
     connect(_onboard, &Onboard::statusChanged, this, &OnboardApplet::onTrainStatusUpdated);
@@ -77,15 +79,40 @@ void OnboardApplet::initEngine(QObject *object)
     Log::debug("QML engine initialized");
 }
 
+void OnboardApplet::configChanged()
+{
+    // Update disconnection icon/label
+    onHasDataStateChanged(_onboard->hasData());
+
+    // Update test mode
+    updateTestModeState();
+
+    Applet::configChanged();
+}
+
+void OnboardApplet::updateTestModeState()
+{
+    KConfigGroup group = config().group("Test mode");
+    QString url = group.readEntry("testModeApiUrl", "http://localhost:9000/api1/rs");
+    _onboard->setTestMode(group.readEntry("testModeEnabled", false), url);
+}
+
+
 void OnboardApplet::onHasDataStateChanged(bool state)
 {
+    KConfigGroup group = config().group("General");
+
+    bool showDcIcon = group.readEntry("iconDisconnectShown", false);
+    bool showDcLabel = group.readEntry("labelDisconnectShown", false);
     if(!state) {
-        //setStatusIcon(QIcon::fromTheme("network-offline-symbolic"));
-        setStatusIcon(QIcon());
-        setStatusText("");
-        setSecondaryStatusText("");
-        setTooltipText(tr("Onboard tracking"));
-        setSecondaryTooltipText(tr("No supported WIFI connection"));
+        QString dcTitle = tr("Onboard tracking");
+        QString dcMessage = tr("No supported WIFI connection");
+        setStatusIconVisible(showDcIcon);
+        setStatusIcon(showDcIcon ? QIcon::fromTheme(group.readEntry("iconDisconnect", "network-offline-symbolic")) : QIcon());
+        setStatusText(showDcLabel ? dcTitle : "");
+        setSecondaryStatusText(showDcLabel ? dcMessage : "");
+        setTooltipText(dcTitle);
+        setSecondaryTooltipText(dcMessage);
     }
 }
 
@@ -136,7 +163,7 @@ void OnboardApplet::onTrainStatusUpdated()
 
             int delay = utils::parseDelayTime(hasArrived ? time->departureDelay() : time->arrivalDelay());
             if(delay > 1) {
-                QString format = hasArrived ? tr("Departure in %1 delayed by %n minutes.", "0", delay) : tr("Arrival in %1 delayed by %n minutes.", "0", delay);
+                QString format = hasArrived ? tr("Departure in %1 delayed by %n minute(s).", "", delay) : tr("Arrival in %1 delayed by %n minute(s).", "", delay);
                 delayInformation = QString(format).arg(nextStation);
             }
 
@@ -150,17 +177,33 @@ void OnboardApplet::onTrainStatusUpdated()
     auto* status = _onboard->status();
     if(hasArrived) {
         setStatusIcon(QIcon::fromTheme("go-right"));
-        setStatusText(QString(tr("At platform %2 in %1")).arg(nextStation).arg(platform));
-        setSecondaryStatusText(tr("%1 km/h | Departure in %n minutes", "0", departingInMin).arg(status->speed()));
+        setStatusText(tr("At platform %2 in %1").arg(nextStation).arg(platform));
+        setSecondaryStatusText(tr("%1 km/h | Departure in %2%n minute(s)", "", std::abs(departingInMin)).arg(status->speed()).arg(departingInMin < 0 ? "-" : ""));
     }
     else {
-        setStatusIcon(QIcon::fromTheme("up"));
-        setStatusText(QString(tr("%1 in %n minutes", "0", arrivingInMin)).arg(nextStation));
+
+        setStatusIcon(QIcon::fromTheme(QIcon::hasThemeIcon("up") ? "up" : "go-up"));
+        setStatusText(tr("%1 in %2%n minute(s)", "", std::abs(arrivingInMin)).arg(nextStation).arg(arrivingInMin < 0 ? "-" : ""));
         setSecondaryStatusText(tr("%1 km/h | %2 km remaining | Platform %3").arg(status->speed()).arg(distanceToNext).arg(platform));
     }
 
+    setStatusIconVisible(true);
+
     setTooltipText(tr("%1 to %2").arg(trainNumber).arg(destination));
     setSecondaryTooltipText(delayInformation);
+}
+
+bool OnboardApplet::statusIconVisible() const
+{
+    return _statusIconVisible;
+}
+
+void OnboardApplet::setStatusIconVisible(bool newStatusIconVisible)
+{
+    if (_statusIconVisible == newStatusIconVisible)
+        return;
+    _statusIconVisible = newStatusIconVisible;
+    emit statusIconVisibleChanged();
 }
 
 QIcon OnboardApplet::statusIcon() const

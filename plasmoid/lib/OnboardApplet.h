@@ -24,6 +24,7 @@ class OnboardApplet : public Plasma::Applet {
     Q_PROPERTY(QString secondaryTooltipText READ secondaryTooltipText WRITE setSecondaryTooltipText NOTIFY secondaryTooltipTextChanged FINAL)
     Q_PROPERTY(QIcon tooltipIcon READ tooltipIcon WRITE setTooltipIcon NOTIFY tooltipIconChanged FINAL)
     Q_PROPERTY(QIcon statusIcon READ statusIcon WRITE setStatusIcon NOTIFY statusIconChanged FINAL)
+    Q_PROPERTY(bool statusIconVisible READ statusIconVisible WRITE setStatusIconVisible NOTIFY statusIconVisibleChanged FINAL)
 
 public:
     OnboardApplet(QObject *parent, const QVariantList &data);
@@ -42,13 +43,20 @@ public:
     QIcon tooltipIcon() const;
     void setTooltipIcon(const QIcon &newTooltipIcon);
 
+    bool statusIconVisible() const;
+    void setStatusIconVisible(bool newStatusIconVisible);
+
 public slots:
     void init() override;
     void initEngine(QObject *object);
 
+protected slots:
+    void configChanged() override;
+
 private slots:
     void onHasDataStateChanged(bool state);
     void onTrainStatusUpdated();
+    void updateTestModeState();
 
 signals:
     void statusTextChanged();
@@ -57,6 +65,8 @@ signals:
     void secondaryTooltipTextChanged();
     void statusIconChanged();
     void tooltipIconChanged();
+
+    void statusIconVisibleChanged();
 
 private:
     bool _initialized;
@@ -68,6 +78,7 @@ private:
     QString _secondaryStatusText;
     QString _tooltipText;
     QString _secondaryTooltipText;
+    bool _statusIconVisible;
 };
 } // namespace Plasmoid
 

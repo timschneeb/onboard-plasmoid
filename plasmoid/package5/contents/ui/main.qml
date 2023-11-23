@@ -7,12 +7,15 @@ import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: onboardApplet
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.StandardBackground | PlasmaCore.Types.ConfigurableBackground
+
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
     Plasmoid.compactRepresentation: CompactRepresentation {
         onWidthChanged: {
-            onboardApplet.Layout.minimumSize = width
-            onboardApplet.Layout.maximumSize = width
+            var w = width
+            onboardApplet.Layout.minimumSize = w
+            onboardApplet.Layout.maximumSize = w
         }
     }
 

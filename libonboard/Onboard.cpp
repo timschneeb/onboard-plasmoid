@@ -8,11 +8,13 @@
 #include <NetworkManagerQt/Manager>
 #include <NetworkManagerQt/WirelessDevice>
 
+#define ONBOARD_BASE_URL QString("https://iceportal.de/api1/rs")
+
 bool Onboard::_ready = false;
 
 QStringList Onboard::_ssids = QStringList(std::initializer_list<QString>({"WIFIonICE", "WIFI@DB"}));
 
-Onboard::Onboard(QObject *parent) : _apiClient(new OnboardApiClient(this)), QObject{parent}
+Onboard::Onboard(QObject *parent) : _apiClient(new OnboardApiClient(ONBOARD_BASE_URL, this)), QObject{parent}
 {
     if(!_ready) {
         Log::critical("Please call Onboard::setup once before using this library.");
@@ -76,7 +78,7 @@ void Onboard::checkConnectionState()
     }
 
     // Compare SSID with list of supported train wifi networks
-    bool connected = _ssids.contains(currentSsid);
+    bool connected = _ssids.contains(currentSsid) || _debugSsids.contains(currentSsid) || _debugSsids.contains("*");
     if (_isConnected != connected) {
         _isConnected = connected;
 
@@ -136,6 +138,16 @@ void Onboard::setHasData(bool newHasData)
         return;
     _hasData = newHasData;
     emit hasDataChanged(_hasData);
+}
+
+void Onboard::setTestMode(bool enabled, const QString& baseUrl, const QString & ssid)
+{
+    _apiClient->setBaseUrl(enabled ? baseUrl : ONBOARD_BASE_URL);
+    if(enabled)
+        _debugSsids.append(ssid);
+    else
+        _debugSsids.clear();
+    checkConnectionState();
 }
 
 Status *Onboard::status() const

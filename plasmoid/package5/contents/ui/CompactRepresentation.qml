@@ -28,7 +28,7 @@ MouseArea {
             source: plasmoid.nativeInterface.statusIcon
             active: parent.parent.containsMouse
 
-            implicitWidth: 32
+            implicitWidth: plasmoid.nativeInterface.statusIconVisible ? 32 : 1
             implicitHeight: 32
         }
 

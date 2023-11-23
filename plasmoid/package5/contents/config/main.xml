@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+    http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+    <group name="General">
+        <entry name="iconDisconnect" type="String">
+            <label>The name of the icon used when no connection is available.</label>
+            <default>network-offline-symbolic</default>
+        </entry>
+        <entry name="iconDisconnectShown" type="Bool">
+            <label>Is the disconnect icon shown when no connection is available</label>
+            <default>false</default>
+        </entry>
+        <entry name="labelDisconnectShown" type="Bool">
+            <label>Is the disconnect label shown when no connection is available</label>
+            <default>false</default>
+        </entry>
+    </group>
+    <group name="Test mode">
+        <entry name="testModeEnabled" type="Bool">
+            <label>Use local API server for testing</label>
+            <default>false</default>
+        </entry>
+        <entry name="testModeApiUrl" type="String">
+            <label>Base URL for local API test sever</label>
+            <default>http://localhost:9000/api1/rs</default>
+        </entry>
+    </group>
+</kcfg>

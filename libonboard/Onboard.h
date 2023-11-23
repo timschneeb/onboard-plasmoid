@@ -28,6 +28,8 @@ public:
     bool hasData() const;
     void setHasData(bool newHasData);
 
+    void setTestMode(bool enabled, const QString& baseUrl, const QString& ssid= "*");
+
 signals:
     void onConnectionStateChanged(bool isConnected);
     void hasDataChanged(bool hasData);
@@ -43,6 +45,7 @@ private slots:
 private:
     static bool _ready;
     static QStringList _ssids;
+    QStringList _debugSsids;
 
     bool _hasData = false;
     bool _isConnected = false;

@@ -5,25 +5,23 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 
-#ifndef USE_LOCAL_SERVER
-#define ONBOARD_BASE_URL QString("https://iceportal.de/api1/rs")
-#else
-#define ONBOARD_BASE_URL QString("http://localhost:9000/api1/rs")
-#endif
-
 class OnboardApiClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit OnboardApiClient(QObject *parent = nullptr);
+    explicit OnboardApiClient(const QString& baseUrl, QObject *parent = nullptr);
 
     QtPromise::QPromise<QString> getStatus();
     QtPromise::QPromise<QString> getTripInfo();
     QtPromise::QPromise<QString> getConnections(QString evaId);
 
+    QString baseUrl() const;
+    void setBaseUrl(const QString &newBaseUrl);
+
 private:
     QtPromise::QPromise<QString> retrieveContent(QString urlPath);
 
+    QString _baseUrl;
 };
 
 #endif // ONBOARDAPICLIENT_H

@@ -8,7 +8,7 @@
 
 using namespace QtPromise;
 
-OnboardApiClient::OnboardApiClient(QObject *parent) : QObject(parent) {}
+OnboardApiClient::OnboardApiClient(const QString &baseUrl, QObject *parent) : QObject(parent), _baseUrl(baseUrl) {}
 
 QtPromise::QPromise<QString> OnboardApiClient::getStatus()
 {
@@ -34,7 +34,7 @@ QtPromise::QPromise<QString> OnboardApiClient::retrieveContent(QString urlPath)
             QNetworkAccessManager* nam = new QNetworkAccessManager();
             nam->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
 
-            auto reqProto = QNetworkRequest(QUrl(ONBOARD_BASE_URL + urlPath));
+            auto reqProto = QNetworkRequest(QUrl(_baseUrl + urlPath));
             reqProto.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::RedirectPolicy::NoLessSafeRedirectPolicy);
 
             QtPromise::connect(nam, &QNetworkAccessManager::finished).then([=](QNetworkReply *reply) {
@@ -69,3 +69,16 @@ QtPromise::QPromise<QString> OnboardApiClient::retrieveContent(QString urlPath)
         }
     };
 }
+
+QString OnboardApiClient::baseUrl() const
+{
+    return _baseUrl;
+}
+
+void OnboardApiClient::setBaseUrl(const QString &newBaseUrl)
+{
+    if (_baseUrl == newBaseUrl)
+        return;
+    _baseUrl = newBaseUrl;
+}
+
