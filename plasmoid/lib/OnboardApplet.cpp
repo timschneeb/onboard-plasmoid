@@ -219,11 +219,11 @@ void OnboardApplet::onTrainStatusUpdated()
     if(hasArrived) {
         setStatusIcon(QIcon::fromTheme(currentStationIconName));
         setStatusText(tr("At platform %2 in %1").arg(nextStation).arg(platform));
-        setSecondaryStatusText(tr("%1 km/h | Departure in %2%n minute(s)", "", std::abs(departingInMin)).arg(status->speed()).arg(departingInMin < 0 ? "-" : ""));
+        setSecondaryStatusText(tr("%1 km/h | Departure in %2%3").arg(status->speed()).arg(departingInMin < 0 ? "-" : "").arg(tr("%n minute(s)", "", std::abs(departingInMin))));
     }
     else {
         setStatusIcon(QIcon::fromTheme(nextStationIconName));
-        setStatusText(tr("%1 in %2%n minute(s)", "", std::abs(arrivingInMin)).arg(nextStation).arg(arrivingInMin < 0 ? "-" : ""));
+        setStatusText(tr("%1 in %2%3").arg(nextStation).arg(arrivingInMin < 0 ? "-" : "").arg(tr("%n minute(s)", "", std::abs(arrivingInMin))));
         setSecondaryStatusText(tr("%1 km/h | %2 km remaining | Platform %3").arg(status->speed()).arg(distanceToNext).arg(platform));
     }
 

@@ -179,16 +179,31 @@ Hinweis: </translation>
     </message>
     <message numerus="yes">
         <source>%1 km/h | Departure in %2%n minute(s)</source>
-        <translation>
+        <translation type="vanished">
             <numerusform>%1 km/h | Abfahrt in %2%n Minute</numerusform>
             <numerusform>%1 km/h | Abfahrt in %2%n Minuten</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%1 in %2%n minute(s)</source>
-        <translation>
+        <translation type="vanished">
             <numerusform>%1 in %2%n Minute</numerusform>
             <numerusform>%1 in %2%n Minuten</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>%1 km/h | Departure in %2%3</source>
+        <translation>%1 km/h | Abfahrt in %2%3</translation>
+    </message>
+    <message>
+        <source>%1 in %2%3</source>
+        <translation>%1 in %2%3</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n Minute</numerusform>
+            <numerusform>%n Minuten</numerusform>
         </translation>
     </message>
 </context>

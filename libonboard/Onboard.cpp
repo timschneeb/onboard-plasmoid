@@ -95,7 +95,7 @@ void Onboard::toggleBackgroundService(bool enable)
 
     if(enable) {
         _pollTimer.setSingleShot(false);
-        _pollTimer.setInterval(4000);
+        _pollTimer.setInterval(2000);
         _pollTimer.start();
         pollData();
     }

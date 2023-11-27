@@ -113,16 +113,31 @@ Notice: </source>
     </message>
     <message numerus="yes">
         <source>%1 km/h | Departure in %2%n minute(s)</source>
-        <translation>
+        <translation type="vanished">
             <numerusform>%1 km/h | Departure in %2%n minute</numerusform>
             <numerusform>%1 km/h | Departure in %2%n minutes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%1 in %2%n minute(s)</source>
-        <translation>
+        <translation type="vanished">
             <numerusform>%1 in %2%n minute</numerusform>
             <numerusform>%1 in %2%n minutes</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>%1 km/h | Departure in %2%3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>%1 in %2%3</source>
+        <translation></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n minute(s)</source>
+        <translation>
+            <numerusform>%n minute</numerusform>
+            <numerusform>%n minutes</numerusform>
         </translation>
     </message>
 </context>
